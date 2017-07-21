@@ -14,11 +14,23 @@ export class AppComponent implements OnInit{
   constructor(private resourceService: ResourceService) {}
 
   ngOnInit(): void {
+    this.getFiles()
+  }
+
+  getFiles() {
     this.resourceService.getFiles()
       .subscribe((data) => {
         console.log(data);
         this.files = data;
         console.log('this.files = ' + this.files[0].name);
+      })
+  }
+
+  onDeleteAction(name: string) {
+    this.resourceService.deleteFile(name)
+      .subscribe( (data) => {
+        console.log(data)
+        this.getFiles()
       })
   }
 }

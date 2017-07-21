@@ -15,9 +15,9 @@
   </thead>
   <tbody>
   <tr *ngFor="let file of files">
-    <td><a href="">{{file.name}}</a></td>
+    <td><a href="http://localhost:3000/api/Containers/container1/download/{{file.name}}" download>{{file.name}}</a></td>
     <td>{{file.size}}</td>
-    <td><button>delete</button></td>
+    <td><button (click)="onDeleteAction(file.name)">delete</button></td>
   </tr>
   </tbody>
 </table>

@@ -19,4 +19,9 @@ export class ResourceService {
     return this.http.get(this.baseUrl)
       .map( data => data as Resource[] )
   }
+
+  deleteFile(name: string) {
+    const url = `${this.baseUrl}/${name}`;
+    return this.http.delete(url)
+  }
 }
