@@ -1,27 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{title}}!
+    Welcome to Johnny's file stack!
   </h1>
+  <nav>
+    <a routerLink="/home">Files</a>
+    <a routerLink="/upload">Upload</a>
+  </nav>
 </div>
-<h2>Here are some links to help you start: </h2>
-<table>
-  <thead>
-    <tr>
-      <td>name</td>
-      <td>size</td>
-      <td>options</td>
-    </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let file of files">
-    <td><a href={{file.link}} download>{{file.name}}</a></td>
-    <td>{{file.getReadableSize()}}</td>
-    <td><button (click)="onDeleteAction(file.name)">delete</button></td>
-  </tr>
-  </tbody>
-</table>
-<div>
-  <button (click)="onPreviousPageAction()" ><</button>{{pageNumber}}/{{totalPage}}<button (click)="onNextPageAction()">> </button>
-</div>
-
+<router-outlet></router-outlet>

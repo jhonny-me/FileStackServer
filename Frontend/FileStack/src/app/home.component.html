@@ -1,0 +1,24 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<h2>Fies goes here: </h2>
+<table>
+  <thead>
+    <tr>
+      <td>name</td>
+      <td>size</td>
+      <td>options</td>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let file of files">
+    <td><a href={{file.link}} download>{{file.name}}</a></td>
+    <td>{{file.getReadableSize()}}</td>
+    <td><button (click)="onDeleteAction(file.name)">delete</button></td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <button (click)="onPreviousPageAction()" ><</button>{{pageNumber}}/{{totalPage}}<button (click)="onNextPageAction()">> </button>
+</div>
+<router-outlet></router-outlet>
+
