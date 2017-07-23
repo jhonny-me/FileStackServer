@@ -10,9 +10,9 @@ module.exports = function(Container) {
   };
 
   Container.remoteMethod('getFilesByPage', {
-    http: {path: '/getFilesByPage', verb: 'post'},
+    http: {path: '/:container/files/pagination', verb: 'post'},
     accepts: [
-      {arg: 'container', type: "string"},
+      {arg: 'container', type: "string", http: {source: 'path'}},
       {arg: 'limit', type: "number"},
       {arg: 'pageNumber', type: "number"}
     ],

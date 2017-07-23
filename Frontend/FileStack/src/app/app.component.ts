@@ -10,6 +10,8 @@ import { ResourceService } from '../services/resource.service';
 export class AppComponent implements OnInit{
   title = 'app';
   files: Resource[] = [];
+  pageNumber = 0;
+  totalPage = 0;
 
   constructor(private resourceService: ResourceService) {}
 
@@ -20,16 +22,34 @@ export class AppComponent implements OnInit{
   getFiles() {
     this.resourceService.getFiles()
       .subscribe((data) => {
-        console.log(data);
         this.files = data;
-        console.log('this.files = ' + this.files[0].name);
+        this.pageNumber = this.resourceService.pageNumber + 1;
+        this.totalPage = this.resourceService.totalPage;
+      })
+  }
+
+  onNextPageAction() {
+    if (this.pageNumber >= this.totalPage) { return }
+    this.resourceService.getNextPageFiles()
+      .subscribe((data) => {
+        this.files = data;
+        this.pageNumber = this.resourceService.pageNumber + 1;
+        this.totalPage = this.resourceService.totalPage;
+      })
+  }
+  onPreviousPageAction() {
+    if (this.pageNumber < 2) {return}
+    this.resourceService.getPrevisouPageFiles()
+      .subscribe((data) => {
+        this.files = data;
+        this.pageNumber = this.resourceService.pageNumber + 1;
+        this.totalPage = this.resourceService.totalPage;
       })
   }
 
   onDeleteAction(name: string) {
     this.resourceService.deleteFile(name)
       .subscribe( (data) => {
-        console.log(data)
         this.getFiles()
       })
   }

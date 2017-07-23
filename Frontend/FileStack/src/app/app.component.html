@@ -15,10 +15,13 @@
   </thead>
   <tbody>
   <tr *ngFor="let file of files">
-    <td><a href="http://localhost:3000/api/Containers/container1/download/{{file.name}}" download>{{file.name}}</a></td>
-    <td>{{file.size}}</td>
+    <td><a href={{file.link}} download>{{file.name}}</a></td>
+    <td>{{file.getReadableSize()}}</td>
     <td><button (click)="onDeleteAction(file.name)">delete</button></td>
   </tr>
   </tbody>
 </table>
+<div>
+  <button (click)="onPreviousPageAction()" ><</button>{{pageNumber}}/{{totalPage}}<button (click)="onNextPageAction()">> </button>
+</div>
 
