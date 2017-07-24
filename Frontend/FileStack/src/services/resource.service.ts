@@ -11,6 +11,7 @@ import { Resource } from '../models/resource';
 @Injectable()
 export class ResourceService {
   private baseUrl = 'http://localhost:3000/api/Containers/container1/files';
+  private uploadUrl = 'http://localhost:3000/api/Containers/container1/upload';
   private limit = 4;
   pageNumber = 0;
   totalPage = 1;
@@ -52,5 +53,14 @@ export class ResourceService {
   deleteFile(name: string) {
     const url = `${this.baseUrl}/${name}`;
     return this.http.delete(url)
+  }
+
+  uploadFiles(files: File[]) {
+    console.log(files);
+    const data = new FormData();
+    files.forEach((file) => {
+      data.append('file', file);
+    });
+    return this.http.post(this.uploadUrl, data)
   }
 }

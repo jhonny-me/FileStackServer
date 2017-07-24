@@ -2,8 +2,8 @@
  * Created by johnny on 23/07/2017.
  */
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
+import { ResourceService } from '../services/resource.service';
 import { Resource } from '../models/resource';
 
 @Component({
@@ -13,15 +13,29 @@ import { Resource } from '../models/resource';
 })
 
 export class UploadComponent implements OnInit {
-  files: Resource[] = [];
+  files: File[] = [];
   selectedFilePaths: string[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private service: ResourceService) {}
   ngOnInit() {
     console.log('upload component init')
   }
 
+  onSelectFilesAction(event) {
+    const files = event.target.files;
+    var fileArray = [];
+    Object.keys(files).forEach((key) => {
+      if (key === 'length') { return }
+      fileArray.push(files[key])
+    });
+    this.files = fileArray;
+    console.log(this.files);
+  }
+
   onUploadAction() {
-    console.log(this.selectedFilePaths);
+    this.service.uploadFiles(this.files).subscribe((data) => {
+      console.log(data);
+      
+    })
   }
 }
